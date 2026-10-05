@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Watch — SCREEN.ge</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    color: white;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+/* NAV */
+
+.navbar {
+
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 35px;
+
+    background: #090909;
+
+    border-bottom: 1px solid #222;
+
+}
+
+.logo {
+
+    font-size: 23px;
+
+    font-weight: 800;
+
+}
+
+.logo span {
+
+    color: #e50914;
+
+    font-weight: 500;
+
+}
+
+.back {
+
+    margin-left: 35px;
+
+    color: #aaa;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+}
+
+.back:hover {
+
+    color: white;
+
+}
+
+
+/* PLAYER */
+
+.player {
+
+    position: relative;
+
+    width: 100%;
+
+    background: black;
+
+}
+
+video {
+
+    display: block;
+
+    width: 100%;
+
+    max-height: 82vh;
+
+    background: black;
+
+}
+
+
+/* EPISODES BUTTON */
+
+.episodes-button {
+
+    position: absolute;
+
+    top: 20px;
+
+    right: 20px;
+
+    z-index: 20;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 10px 15px;
+
+    background: rgba(15,15,15,0.9);
+
+    color: white;
+
+    border: 1px solid
+        rgba(255,255,255,0.2);
+
+    border-radius: 8px;
+
+    font-family: 'Montserrat';
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+/* THREE LINES */
+
+.menu-icon {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+}
+
+.menu-icon span {
+
+    width: 16px;
+
+    height: 2px;
+
+    background: white;
+
+}
+
+
+/* EPISODE PANEL */
+
+.episode-panel {
+
+    position: absolute;
+
+    top: 68px;
+
+    right: 20px;
+
+    width: 430px;
+
+    max-height: 70vh;
+
+    background:
+        rgba(14,14,14,0.98);
+
+    border: 1px solid #333;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    display: none;
+
+    z-index: 100;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,0.8);
+
+}
+
+.episode-panel.open {
+
+    display: block;
+
+}
+
+
+/* SEASONS */
+
+.seasons {
+
+    display: flex;
+
+    gap: 7px;
+
+    padding: 14px;
+
+    overflow-x: auto;
+
+    border-bottom: 1px solid #292929;
+
+}
+
+.season {
+
+    flex: 0 0 auto;
+
+    min-width: 38px;
+
+    padding: 9px 12px;
+
+    background: #222;
+
+    color: #aaa;
+
+    border: 0;
+
+    border-radius: 6px;
+
+    font-family: 'Montserrat';
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+.season:hover {
+
+    background: #333;
+
+    color: white;
+
+}
+
+.season.active {
+
+    background: #e50914;
+
+    color: white;
+
+}
+
+
+/* EPISODES */
+
+.episode-list {
+
+    max-height: 55vh;
+
+    overflow-y: auto;
+
+}
+
+.episode {
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 14px 16px;
+
+    border-bottom: 1px solid #222;
+
+}
+
+.episode.playable {
+
+    cursor: pointer;
+
+}
+
+.episode.playable:hover {
+
+    background: #222;
+
+}
+
+.episode.active {
+
+    background: #292929;
+
+    border-left:
+        3px solid #e50914;
+
+}
+
+.episode.disabled {
+
+    opacity: 0.35;
+
+}
+
+.number {
+
+    width: 45px;
+
+    color: #777;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+}
+
+.info {
+
+    flex: 1;
+
+}
+
+.title {
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+.subtitle {
+
+    color: #777;
+
+    font-size: 11px;
+
+    margin-top: 4px;
+
+}
+
+.play {
+
+    color: #e50914;
+
+}
+
+
+/* INFO BELOW PLAYER */
+
+.info-section {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 35px 30px 70px;
+
+}
+
+.show-title {
+
+    font-size: 28px;
+
+    font-weight: 800;
+
+}
+
+.episode-title {
+
+    color: #aaa;
+
+    font-size: 14px;
+
+    margin-top: 8px;
+
+}
+
+.description {
+
+    max-width: 800px;
+
+    color: #999;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    margin-top: 20px;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:700px) {
+
+    .navbar {
+
+        padding: 0 20px;
+
+    }
+
+    .back {
+
+        margin-left: 20px;
+
+    }
+
+    .episodes-button {
+
+        top: 10px;
+
+        right: 10px;
+
+        padding: 8px 11px;
+
+    }
+
+    .episode-panel {
+
+        top: 55px;
+
+        right: 10px;
+
+        width:
+            calc(100% - 20px);
+
+    }
+
+    .info-section {
+
+        padding:
+            25px 20px 50px;
+
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- NAVIGATION -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        SCREEN<span>.ge</span>
+
+    </div>
+
+
+    <a
+        class="back"
+        href="show.html">
+
+        ← Back to Show
+
+    </a>
+
+</header>
+
+
+<!-- VIDEO -->
+
+<section class="player">
+
+    <video
+        id="videoPlayer"
+        controls
+        preload="metadata">
+
+        Your browser does not support
+        HTML5 video.
+
+    </video>
+
+
+    <!-- EPISODES -->
+
+    <button
+        class="episodes-button"
+        onclick="toggleEpisodes()">
+
+        <div class="menu-icon">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+        Episodes
+
+    </button>
+
+
+    <div
+        class="episode-panel"
+        id="episodePanel">
+
+
+        <div
+            class="seasons"
+            id="seasons">
+        </div>
+
+
+        <div
+            class="episode-list"
+            id="episodeList">
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- INFORMATION -->
+
+<section class="info-section">
+
+    <h1
+        class="show-title">
+
+        Shua Kalakshi
+
+    </h1>
+
+
+    <div
+        class="episode-title"
+        id="episodeTitle">
+
+        Season 6 · Episode 1
+
+    </div>
+
+
+    <p class="description">
+
+        შუა ქალაქში — Shua Kalakshi
+
+        A Georgian situation comedy
+        following the everyday lives,
+        friendships and relationships
+        of a group of people living
+        in Tbilisi.
+
+    </p>
+
+</section>
+
+
+<script>
+
+/* ==========================================
+   AVAILABLE VIDEOS
+========================================== */
+
+const videos = {
+
+    "6-1":
+        "C:/Users/User/Downloads/S6E1.mp4",
+
+    "6-2":
+        "C:/Users/User/Downloads/S6E2.mp4"
+
+};
+
+
+/* ==========================================
+   SEASON EPISODE COUNTS
+========================================== */
+
+const seasonEpisodes = {
+
+    1: 1,
+    2: 1,
+    3: 1,
+    4: 1,
+    5: 1,
+
+    6: 2,
+
+    7: 1,
+    8: 1,
+    9: 1,
+    10: 1,
+    11: 1,
+    12: 1,
+    13: 1,
+    14: 1,
+    15: 1,
+    16: 1
+
+};
+
+
+/* ==========================================
+   ELEMENTS
+========================================== */
+
+const player =
+    document.getElementById(
+        "videoPlayer"
+    );
+
+const panel =
+    document.getElementById(
+        "episodePanel"
+    );
+
+const seasons =
+    document.getElementById(
+        "seasons"
+    );
+
+const episodeList =
+    document.getElementById(
+        "episodeList"
+    );
+
+const episodeTitle =
+    document.getElementById(
+        "episodeTitle"
+    );
+
+
+/* ==========================================
+   GET URL PARAMETERS
+========================================== */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+let currentSeason =
+    parseInt(
+        params.get("season")
+    ) || 6;
+
+
+let currentEpisode =
+    parseInt(
+        params.get("episode")
+    ) || 1;
+
+
+/* ==========================================
+   EPISODE MENU
+========================================== */
+
+function toggleEpisodes() {
+
+    panel.classList.toggle(
+        "open"
+    );
+
+}
+
+
+/* ==========================================
+   CREATE SEASONS
+========================================== */
+
+function createSeasons() {
+
+    seasons.innerHTML = "";
+
+
+    for (
+        let season = 1;
+        season <= 16;
+        season++
+    ) {
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+        button.className =
+            "season";
+
+        button.textContent =
+            season;
+
+
+        if (
+            season === currentSeason
+        ) {
+
+            button.classList.add(
+                "active"
+            );
+
+        }
+
+
+        button.onclick =
+            function() {
+
+                document
+                    .querySelectorAll(
+                        ".season"
+                    )
+                    .forEach(
+                        function(btn) {
+
+                            btn.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                loadEpisodes(
+                    season
+                );
+
+            };
+
+
+        seasons.appendChild(
+            button
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   LOAD EPISODES
+========================================== */
+
+function loadEpisodes(
+    season
+) {
+
+    episodeList.innerHTML = "";
+
+
+    const count =
+        seasonEpisodes[season] || 1;
+
+
+    for (
+        let episode = 1;
+        episode <= count;
+        episode++
+    ) {
+
+        const key =
+            season + "-" + episode;
+
+
+        const source =
+            videos[key];
+
+
+        const item =
+            document.createElement(
+                "div"
+            );
+
+        item.className =
+            "episode";
+
+
+        if (source) {
+
+            item.classList.add(
+                "playable"
+            );
+
+        } else {
+
+            item.classList.add(
+                "disabled"
+            );
+
+        }
+
+
+        if (
+            season === currentSeason &&
+            episode === currentEpisode
+        ) {
+
+            item.classList.add(
+                "active"
+            );
+
+        }
+
+
+        /* NUMBER */
+
+        const number =
+            document.createElement(
+                "div"
+            );
+
+        number.className =
+            "number";
+
+        number.textContent =
+            String(episode).padStart(
+                2,
+                "0"
+            );
+
+
+        /* INFO */
+
+        const info =
+            document.createElement(
+                "div"
+            );
+
+        info.className =
+            "info";
+
+
+        const title =
+            document.createElement(
+                "div"
+            );
+
+        title.className =
+            "title";
+
+        title.textContent =
+            "Episode " + episode;
+
+
+        const subtitle =
+            document.createElement(
+                "div"
+            );
+
+        subtitle.className =
+            "subtitle";
+
+        subtitle.textContent =
+            source
+                ? "Available"
+                : "Not available yet";
+
+
+        info.appendChild(
+            title
+        );
+
+        info.appendChild(
+            subtitle
+        );
+
+
+        /* PLAY */
+
+        const play =
+            document.createElement(
+                "div"
+            );
+
+        play.className =
+            "play";
+
+        play.textContent =
+            source
+                ? "▶"
+                : "";
+
+
+        item.appendChild(
+            number
+        );
+
+        item.appendChild(
+            info
+        );
+
+        item.appendChild(
+            play
+        );
+
+
+        /* CLICK */
+
+        if (source) {
+
+            item.onclick =
+                function() {
+
+                    playEpisode(
+                        season,
+                        episode
+                    );
+
+                };
+
+        }
+
+
+        episodeList.appendChild(
+            item
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   PLAY EPISODE
+========================================== */
+
+function playEpisode(
+    season,
+    episode
+) {
+
+    const key =
+        season + "-" + episode;
+
+
+    const source =
+        videos[key];
+
+
+    if (!source) {
+
+        return;
+
+    }
+
+
+    currentSeason =
+        season;
+
+    currentEpisode =
+        episode;
+
+
+    player.pause();
+
+
+    player.src =
+        source;
+
+
+    player.load();
+
+
+    episodeTitle.textContent =
+        "Season " +
+        season +
+        " · Episode " +
+        episode;
+
+
+    player.play().catch(
+        function(error) {
+
+            console.log(
+                "Playback waiting for user interaction.",
+                error
+            );
+
+        }
+    );
+
+
+    createSeasons();
+
+    loadEpisodes(
+        season
+    );
+
+
+    panel.classList.remove(
+        "open"
+    );
+
+
+    /*
+        Update URL
+        without reloading page
+    */
+
+    history.replaceState(
+        null,
+        "",
+        "watch.html?season=" +
+        season +
+        "&episode=" +
+        episode
+    );
+
+}
+
+
+/* ==========================================
+   INITIAL VIDEO
+========================================== */
+
+createSeasons();
+
+loadEpisodes(
+    currentSeason
+);
+
+
+/* Load current video */
+
+const initialKey =
+    currentSeason +
+    "-" +
+    currentEpisode;
+
+
+if (videos[initialKey]) {
+
+    player.src =
+        videos[initialKey];
+
+    player.load();
+
+}
+
+
+/* ==========================================
+   CLOSE MENU WHEN CLICKING OUTSIDE
+========================================== */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const button =
+            document.querySelector(
+                ".episodes-button"
+            );
+
+
+        if (
+            !panel.contains(
+                event.target
+            ) &&
+            !button.contains(
+                event.target
+            )
+        ) {
+
+            panel.classList.remove(
+                "open"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

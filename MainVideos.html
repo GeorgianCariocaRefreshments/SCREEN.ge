@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SCREEN.ge — Home</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #080808;
+    color: white;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+/* NAVIGATION */
+
+.navbar {
+    height: 70px;
+    background: rgba(8,8,8,0.96);
+    border-bottom: 1px solid #222;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 45px;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    color: white;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: #e50914;
+    font-weight: 500;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    margin-left: 50px;
+}
+
+.nav-links a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 520px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 80px 20px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.15),
+            #080808 95%
+        ),
+        radial-gradient(
+            circle at center,
+            #272727,
+            #080808 65%
+        );
+}
+
+.hero h1 {
+    font-size: 42px;
+    font-weight: 800;
+
+    margin-bottom: 25px;
+}
+
+.hero p {
+    color: #aaa;
+    font-size: 15px;
+
+    margin-bottom: 25px;
+}
+
+/* SEARCH */
+
+.search-container {
+    width: min(700px, 90%);
+}
+
+.search-box {
+    width: 100%;
+
+    height: 58px;
+
+    background: rgba(20,20,20,0.95);
+
+    border: 1px solid #444;
+
+    border-radius: 8px;
+
+    color: white;
+
+    padding: 0 22px;
+
+    font-family: 'Montserrat';
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+.search-box:focus {
+    border-color: #e50914;
+}
+
+.search-results {
+    width: min(700px, 90%);
+
+    margin-top: 12px;
+
+    text-align: left;
+
+    display: none;
+
+    background: #151515;
+
+    border: 1px solid #333;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+.search-result {
+    padding: 16px 20px;
+
+    cursor: pointer;
+
+    border-bottom: 1px solid #292929;
+}
+
+.search-result:hover {
+    background: #222;
+}
+
+.search-result-title {
+    font-weight: 600;
+}
+
+.search-result-subtitle {
+    color: #777;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* CONTENT */
+
+.content {
+    max-width: 1250px;
+
+    margin: auto;
+
+    padding: 20px 30px 80px;
+}
+
+.section-title {
+    font-size: 23px;
+
+    margin: 35px 0 20px;
+
+    font-weight: 700;
+}
+
+/* CARDS */
+
+.card-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(190px, 1fr));
+
+    gap: 20px;
+}
+
+.card {
+    background: #151515;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        background 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.035);
+
+    background: #202020;
+}
+
+.poster {
+    height: 270px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #333,
+            #111
+        );
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 20px;
+}
+
+.poster-title {
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.card-info {
+    padding: 14px;
+}
+
+.card-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.card-meta {
+    color: #777;
+
+    font-size: 11px;
+
+    margin-top: 6px;
+}
+
+/* EMPTY MOVIES */
+
+.empty {
+    background: #111;
+
+    border: 1px solid #222;
+
+    border-radius: 8px;
+
+    padding: 35px;
+
+    color: #666;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+/* FOOTER */
+
+footer {
+    border-top: 1px solid #222;
+
+    text-align: center;
+
+    color: #555;
+
+    padding: 30px;
+
+    font-size: 11px;
+}
+
+/* MOBILE */
+
+@media(max-width:700px) {
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        min-height: 450px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .card-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .poster {
+        height: 230px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- NAVIGATION -->
+
+<header class="navbar">
+
+    <div class="logo">
+        SCREEN<span>.ge</span>
+    </div>
+
+    <nav class="nav-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="#tv">
+            TV Shows
+        </a>
+
+        <a href="#movies">
+            Movies
+        </a>
+
+        <a href="#">
+            My List
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- HERO / SEARCH -->
+
+<section class="hero">
+
+    <h1>
+        What do you want to watch?
+    </h1>
+
+    <p>
+        Search movies and TV shows on SCREEN.ge
+    </p>
+
+
+    <div class="search-container">
+
+        <input
+            id="searchBox"
+            class="search-box"
+            type="text"
+            placeholder="Search movies & TV shows..."
+            autocomplete="off">
+
+    </div>
+
+
+    <div
+        id="searchResults"
+        class="search-results">
+    </div>
+
+</section>
+
+
+<!-- CONTENT -->
+
+<main class="content">
+
+
+    <!-- TV SHOWS -->
+
+    <section id="tv">
+
+        <h2 class="section-title">
+            TV Shows
+        </h2>
+
+
+        <div class="card-grid">
+
+
+            <div
+                class="card"
+                onclick="openShow()">
+
+                <div class="poster">
+
+                    <div class="poster-title">
+                        შუა ქალაქში
+                    </div>
+
+                </div>
+
+
+                <div class="card-info">
+
+                    <div class="card-title">
+                        Shua Kalakshi
+                    </div>
+
+                    <div class="card-meta">
+                        2007–2013 · 16 Seasons
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- MOVIES -->
+
+    <section id="movies">
+
+        <h2 class="section-title">
+            Movies
+        </h2>
+
+
+        <div class="empty">
+
+            No movies available yet.
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    SCREEN.ge · Streaming Platform
+
+</footer>
+
+
+<script>
+
+/* OPEN SHOW */
+
+function openShow() {
+
+    window.location.href =
+        "show.html";
+
+}
+
+
+/* SEARCH DATABASE */
+
+const shows = [
+
+    {
+        title: "Shua Kalakshi",
+        georgian: "შუა ქალაქში",
+        type: "TV Show",
+        link: "show.html"
+    }
+
+];
+
+
+/* SEARCH */
+
+const searchBox =
+    document.getElementById(
+        "searchBox"
+    );
+
+const searchResults =
+    document.getElementById(
+        "searchResults"
+    );
+
+
+searchBox.addEventListener(
+    "input",
+    function() {
+
+        const query =
+            searchBox.value
+                .toLowerCase()
+                .trim();
+
+
+        searchResults.innerHTML = "";
+
+
+        if (!query) {
+
+            searchResults.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        const matches =
+            shows.filter(function(show) {
+
+                return (
+
+                    show.title
+                        .toLowerCase()
+                        .includes(query)
+
+                    ||
+
+                    show.georgian
+                        .toLowerCase()
+                        .includes(query)
+
+                );
+
+            });
+
+
+        if (matches.length === 0) {
+
+            searchResults.innerHTML =
+
+                '<div class="search-result">' +
+                '<div class="search-result-title">' +
+                'No results found' +
+                '</div>' +
+                '</div>';
+
+        }
+
+
+        matches.forEach(function(show) {
+
+            const result =
+                document.createElement("div");
+
+            result.className =
+                "search-result";
+
+
+            result.innerHTML =
+
+                '<div class="search-result-title">' +
+                show.title +
+                '</div>' +
+
+                '<div class="search-result-subtitle">' +
+                show.georgian +
+                ' · ' +
+                show.type +
+                '</div>';
+
+
+            result.onclick =
+                function() {
+
+                    window.location.href =
+                        show.link;
+
+                };
+
+
+            searchResults.appendChild(
+                result
+            );
+
+        });
+
+
+        searchResults.style.display =
+            "block";
+
+    }
+
+);
+
+</script>
+
+</body>
+</html>
+
